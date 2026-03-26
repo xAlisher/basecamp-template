@@ -1,0 +1,10 @@
+{
+  "name": "mymodule",
+  "version": "1.0.0",
+  "type": "core",
+  "author": "yourname",
+  "description": "My Basecamp module",
+  "main": "mymodule_plugin",
+  "category": "general",
+  "dependencies": []
+}

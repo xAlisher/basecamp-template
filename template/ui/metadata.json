@@ -1,0 +1,13 @@
+{
+  "name": "my-module-ui",
+  "version": "1.0.0",
+  "type": "ui_qml",
+  "pluginType": "qml",
+  "author": "yourname",
+  "description": "UI for my module",
+  "category": "general",
+  "dependencies": ["mymodule"],
+  "main": "Main.qml",
+  "capabilities": [],
+  "icon": ""
+}

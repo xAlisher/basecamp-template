@@ -1,0 +1,14 @@
+{
+  "name": "mymodule",
+  "version": "1.0.0",
+  "type": "core",
+  "author": "yourname",
+  "description": "My Basecamp module",
+  "category": "general",
+  "dependencies": [],
+  "icon": "",
+  "main": {
+    "linux-amd64": "mymodule_plugin.so"
+  },
+  "manifestVersion": "0.1.0"
+}

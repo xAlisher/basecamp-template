@@ -1,0 +1,14 @@
+{
+  "name": "my-module-ui",
+  "version": "1.0.0",
+  "type": "ui_qml",
+  "author": "yourname",
+  "description": "UI for my module",
+  "category": "general",
+  "dependencies": ["mymodule"],
+  "icon": "",
+  "main": {
+    "linux-amd64": "Main.qml"
+  },
+  "manifestVersion": "0.1.0"
+}
