@@ -104,7 +104,7 @@ configure_file(
 
 ## Manifest and metadata files
 
-You need **three** JSON files total. Getting any of them wrong causes silent failures.
+You need **four** JSON files total (three for runtime, one for LGX packaging). Getting any of them wrong causes silent failures.
 
 ### Core module: `modules/<name>/manifest.json`
 
@@ -192,6 +192,27 @@ You need **three** JSON files total. Getting any of them wrong causes silent fai
 - `name` must match the directory name exactly (including hyphens vs underscores)
 - `dependencies` must list the core module name — this tells the shell to load the core first
 - `main` in metadata.json is a simple string (`"Main.qml"`)
+
+### Root: `metadata.json` (for LGX bundler)
+
+```json
+{
+  "name": "mymodule",
+  "version": "1.0.0",
+  "description": "What this module does",
+  "author": "yourname",
+  "type": "core",
+  "category": "general",
+  "main": "mymodule_plugin",
+  "dependencies": []
+}
+```
+
+**Rules:**
+- `main` is a simple string — no `.so` extension (the bundler appends it automatically)
+- This file lives at the project root, not inside `core/`
+- The LGX bundler (`nix-bundle-lgx`) reads this to determine the main library. Without a valid `main` field, packaging fails with: `error: no 'main' field in metadata.json`
+- Keep fields consistent with `core/manifest.json` and `core/plugin_metadata.json`
 
 ## Module vs plugin naming
 

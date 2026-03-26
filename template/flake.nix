@@ -66,7 +66,7 @@
               mkdir -p $out/lib
               cp core/mymodule_plugin.so $out/lib/
               cp ${./core/manifest.json} $out/lib/manifest.json
-              cp ${./core/plugin_metadata.json} $out/lib/metadata.json
+              cp ${./metadata.json} $out/lib/metadata.json
             '';
           };
 

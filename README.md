@@ -36,17 +36,20 @@ basecamp-template/
 ├── template/
 │   ├── CMakeLists.txt         ← working CMake for core + ui plugins
 │   ├── flake.nix              ← Nix flake for reproducible builds
+│   ├── metadata.json          ← root metadata for LGX bundler
 │   ├── core/
 │   │   ├── MyPlugin.h         ← PluginInterface implementation skeleton
 │   │   ├── MyPlugin.cpp       ← Q_INVOKABLE methods returning JSON
-│   │   ├── plugin_metadata.json
-│   │   └── manifest.json      ← type: "core"
+│   │   ├── plugin_metadata.json ← embedded in .so via Q_PLUGIN_METADATA
+│   │   └── manifest.json      ← type: "core" (runtime discovery)
 │   ├── ui/
 │   │   ├── Main.qml           ← minimal QML screen with callModule example
-│   │   └── manifest.json      ← type: "ui_qml"
+│   │   ├── manifest.json      ← type: "ui_qml"
+│   │   └── metadata.json      ← UI plugin metadata (both files required!)
 │   └── scripts/
 │       ├── install.sh         ← cmake --build + --install shortcut
-│       └── relaunch.sh        ← kill all Logos processes + relaunch AppImage
+│       ├── relaunch.sh        ← kill all Logos processes + relaunch AppImage
+│       └── package-lgx.sh     ← build .lgx packages for distribution
 └── CHECKLIST.md               ← UI/UX test checklist template
 ```
 
@@ -107,6 +110,22 @@ sleep 2
 ```
 
 Your module should appear in the Basecamp sidebar. Click it to load your QML UI.
+
+### 5. Package for distribution (optional)
+
+```bash
+# Build portable .lgx packages
+./scripts/package-lgx.sh
+
+# Or via nix directly
+nix run .#package-lgx
+```
+
+This produces two files:
+- `mymodule-core.lgx` (591K) — core plugin + bundled deps (libsodium)
+- `mymodule-ui.lgx` (2.3K) — QML UI
+
+LGX files can be installed via Basecamp's Package Manager. See [docs/build-and-test.md](docs/build-and-test.md) for details.
 
 ---
 
